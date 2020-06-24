@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Analyze Sample</title>
+    <title>Lemons or Limes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <body>
@@ -12,31 +12,22 @@
         // *** Update or verify the following values. ***
         // **********************************************
 
-        var subscriptionKey = document.getElementById("subscriptionKey").value;
-        var endpoint = document.getElementById("endpointUrl").value;
+        let subscriptionKey = '1f7e5cbbb079455aa350177595c2a4b0';
+        let endpoint = 'https://tippcv-training.cognitiveservices.azure.com/customvision/v3.0/Prediction/f6f62566-f003-40c6-bbf9-e66c97347d75/classify/iterations/Iteration3/url';
+        if (!subscriptionKey) { throw new Error('Set your environment variables for your subscription key and endpoint.'); }
         
-        var uriBase = endpoint;
-
-        // Request parameters.
-        var params = {
-            "visualFeatures": "Categories,Description,Color",
-            "details": "",
-            "language": "en",
-        };
-
         // Display the image.
         var sourceImageUrl = document.getElementById("inputImage").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
 
         // Make the REST API call.
         $.ajax({
-            url: uriBase + "?" + $.param(params),
+            url: endpoint + "?",
 
             // Request headers.
             beforeSend: function(xhrObj){
                 xhrObj.setRequestHeader("Content-Type","application/json");
-                xhrObj.setRequestHeader(
-                    "Ocp-Apim-Subscription-Key", subscriptionKey);
+                xhrObj.setRequestHeader("Prediction-Key", subscriptionKey);
             },
 
             type: "POST",
@@ -64,16 +55,9 @@
 <h1>Analyze image:</h1>
 Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
-Subscription key: 
-<input type="text" name="subscriptionKey" id="subscriptionKey"
-    value="" /> 
-Endpoint URL:
-<input type="text" name="endpointUrl" id="endpointUrl"
-    value="" />
-<br><br>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
-    value="https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/newseventsimage_1529346275459_mainnews2012_x1.jpg" />
+    value="https://cdn.shopify.com/s/files/1/2336/3219/products/shutterstock_336818993meyer_x850.jpg" />
 <button onclick="processImage()">Analyze image</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
