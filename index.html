@@ -14,16 +14,15 @@
         };
       
         $.ajax({
-            url: "https://tippcv-training.cognitiveservices.azure.com/customvision/v3.0/Prediction/f6f62566-f003-40c6-bbf9-e66c97347d75/classify/iterations/Iteration3/image/nostore?" + $.param(params),
-            
+            url: "https://tippcv-training.cognitiveservices.azure.com/customvision/v3.0/Prediction/f6f62566-f003-40c6-bbf9-e66c97347d75/classify/iterations/Iteration3/url" + $.param(params),
             beforeSend: function(xhrObj){
                 // Request headers
-                xhrObj.setRequestHeader("Content-Type","application/octet-stream");
-                xhrObj.setRequestHeader("Prediction-key","1f7e5cbbb079455aa350177595c2a4b0");
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Prediction-key","application/octet-stream");
             },
             type: "POST",
             // Request body
-            data: "<image file>",
+            data: "{body}",
         })
         .done(function(data) {
             alert("success");
