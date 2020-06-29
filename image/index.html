@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h2>Ralph's Bird Classifier:</h2>
+<h2>RT's Bird Classifier:</h2>
 
 Image to analyze:
 <input type='file' accept='image/*' onchange='openFile(event)' />
@@ -18,7 +18,7 @@ Image to analyze:
 
 <script type="text/javascript">
 
-    var openFile = function(file) {
+    openFile = function(file) {
         var input = file.target;
 
         var reader = new FileReader();
@@ -43,10 +43,10 @@ Image to analyze:
 
             var imgContent = new Blob([uInt8Array], { type: contentType });
 
-            const something = new Image();          // creates an <img> element
-            something.src = reader.result;          // loads the data URL as the image source
-            document.querySelector("#sourceImage").src = something.src
-            
+            const imgdisplay = new Image();          // creates an <img> element
+            imgdisplay.src = reader.result;          // loads the data URL as the image source
+            document.querySelector("#sourceImage").src = imgdisplay.src
+
             $.ajax({
                 url: "https://tippcv-training.cognitiveservices.azure.com/customvision/v3.0/Prediction/f6f62566-f003-40c6-bbf9-e66c97347d75/classify/iterations/Iteration3/image?" + $.param(params),
                 beforeSend: function(xhrObj){
@@ -57,6 +57,7 @@ Image to analyze:
                 type: "POST",
                 // Request body
                 data: imgContent,
+                processData: false
             })
             .done(function(data) {
                 // Show formatted JSON on webpage.
