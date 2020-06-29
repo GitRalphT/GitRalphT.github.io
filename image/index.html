@@ -45,7 +45,7 @@ Image to analyze:
 
             const imgdisplay = new Image();          // creates an <img> element
             imgdisplay.src = reader.result;          // loads the data URL as the image source
-            document.querySelector("#sourceImage").src = imgdisplay.src
+            document.querySelector("#sourceImage").src = imgdisplay.src;
 
             $.ajax({
                 url: "https://tippcv-training.cognitiveservices.azure.com/customvision/v3.0/Prediction/f6f62566-f003-40c6-bbf9-e66c97347d75/classify/iterations/Iteration3/image?" + $.param(params),
